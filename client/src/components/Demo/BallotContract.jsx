@@ -72,18 +72,20 @@ function BallotContract() {
   
 
   return (
-    <div>
-      <div>
-        <h2>Proposals</h2>
-        <ul>
+    <div className="max-w-2xl mx-auto p-5">
+      <div className="mb-6">
+        <h1 className="text-blue-500">Hello, Tailwind!</h1>
+        <h2 className="text-xl font-semibold mb-4">Proposals</h2>
+        <ul className="list-disc pl-5">
           {proposals.map((proposal, index) => (
-            <li key={index}>{proposal}</li>
+            <li key={index} className="mb-1">{proposal}</li>
           ))}
         </ul>
       </div>
-      <div>
-        <label htmlFor="accountSelect">Choose an account: </label>
-        <select id="accountSelect" value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
+
+      <div className="mb-6">
+        <label htmlFor="accountSelect" className="block mb-2">Choose an account:</label>
+        <select id="accountSelect" className="border border-gray-300 rounded p-2 w-full" value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
           {accounts.map((account, index) => (
             <option key={index} value={account}>
               {account}
@@ -91,8 +93,9 @@ function BallotContract() {
           ))}
         </select>
       </div>
-      <div>
-        <select value={voteIndex} onChange={(e) => setVoteIndex(e.target.value)}>
+
+      <div className="mb-6">
+        <select className="border border-gray-300 rounded p-2 w-full mb-4" value={voteIndex} onChange={(e) => setVoteIndex(e.target.value)}>
           <option value="">Select a Proposal</option>
           {proposals.map((proposal, index) => (
             <option key={index} value={index}>
@@ -100,19 +103,22 @@ function BallotContract() {
             </option>
           ))}
         </select>
-        <button onClick={vote}>Vote</button>
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={vote}>Vote</button>
       </div>
-      <div>
-        <input type="text" value={delegateAddress} onChange={(e) => setDelegateAddress(e.target.value)} />
-        <button onClick={delegate}>Delegate Vote</button>
+
+      <div className="mb-6">
+        <input type="text" className="border border-gray-300 rounded p-2 w-full mb-4" value={delegateAddress} onChange={(e) => setDelegateAddress(e.target.value)} />
+        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={delegate}>Delegate Vote</button>
       </div>
-      <div>
-        <input type="text" value={voterAddresses} onChange={(e) => setVoterAddresses(e.target.value)} placeholder="Enter addresses separated by commas" />
-        <button onClick={giveRightToVote}>Give Right to Vote</button>
+
+      <div className="mb-6">
+        <input type="text" className="border border-gray-300 rounded p-2 w-full mb-4" value={voterAddresses} onChange={(e) => setVoterAddresses(e.target.value)} placeholder="Enter addresses separated by commas" />
+        <button className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded" onClick={giveRightToVote}>Give Right to Vote</button>
       </div>
+
       <div>
-        <button onClick={getWinnerName}>Get Winner Name</button>
-        {winnerName && <p>Winner: {winnerName}</p>}
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={getWinnerName}>Get Winner Name</button>
+        {winnerName && <p className="mt-4 text-lg">Winner: {winnerName}</p>}
       </div>
     </div>
   );
