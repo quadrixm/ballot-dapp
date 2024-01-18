@@ -31,6 +31,12 @@ contract Ballot {
     }
   }
 
+  event RightGiven(address[] _voters);
+
+  event Delegated(address to);
+
+  event Voted(uint proposal);
+
   function giveRightToVote(address[] memory _voters)  external {
     require(msg.sender == chairPerson, "Only chairperson can give right to vote.");
     for (uint i = 0; i < _voters.length; i++) {
@@ -41,6 +47,8 @@ contract Ballot {
         voters[voter].weight = 1;
       }
     }
+
+    emit RightGiven(_voters);
   }
 
   function delegate(address to)  external {
@@ -70,6 +78,8 @@ contract Ballot {
       // else update the weight
       delegate_.weight += sender.weight;
     }
+
+    emit Delegated(to);
   }
 
   function vote(uint proposal) external {
@@ -81,6 +91,8 @@ contract Ballot {
     sender.vote = proposal;
 
     proposals[proposal].voteCount += sender.weight;
+
+    emit Voted(proposal);
   }
 
   function winningProposal() public view returns (uint winningProposal_, bool winningIsTie_) {

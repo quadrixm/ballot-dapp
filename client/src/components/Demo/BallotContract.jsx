@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import web3 from 'web3';
 import useEth from "../../contexts/EthContext/useEth";
 
@@ -11,6 +11,39 @@ function BallotContract() {
   const [selectedAccount, setSelectedAccount] = useState(accounts[0] || "");
 
   const proposals = ['Alice', 'Bob', 'Eve'];
+
+  useEffect(() => {
+    contract.events.RightGiven({
+      fromBlock: 'latest'
+    }, (error, event) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log(event);
+            // Handle the event here
+        }
+    });
+    contract.events.Delegated({
+      fromBlock: 'latest'
+    }, (error, event) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log(event);
+            // Handle the event here
+        }
+    });
+    contract.events.Voted({
+      fromBlock: 'latest'
+    }, (error, event) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log(event);
+            // Handle the event here
+        }
+    });
+  }, [contract]);
 
   const vote = async () => {
     try {
@@ -74,7 +107,6 @@ function BallotContract() {
   return (
     <div className="max-w-2xl mx-auto p-5">
       <div className="mb-6">
-        <h1 className="text-blue-500">Hello, Tailwind!</h1>
         <h2 className="text-xl font-semibold mb-4">Proposals</h2>
         <ul className="list-disc pl-5">
           {proposals.map((proposal, index) => (
